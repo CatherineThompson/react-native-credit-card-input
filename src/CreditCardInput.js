@@ -21,13 +21,18 @@ const s = StyleSheet.create({
     marginTop: 20,
   },
   inputContainer: {
-    marginLeft: 20,
   },
   inputLabel: {
-    fontWeight: "bold",
+    fontSize: 34 / 2,
+    paddingLeft: 10,
+    paddingRight: 10,
+    justifyContent: "center",
+    lineHeight: 40,
   },
   input: {
     height: 40,
+    paddingLeft: 10,
+    paddingRight: 10,
   },
 });
 
@@ -60,8 +65,6 @@ export default class CreditCardInput extends Component {
     cardFontFamily: PropTypes.string,
     cardBrandIcons: PropTypes.object,
 
-    allowScroll: PropTypes.bool,
-
     additionalInputsProps: PropTypes.objectOf(PropTypes.shape(TextInput.propTypes)),
   };
 
@@ -82,13 +85,10 @@ export default class CreditCardInput extends Component {
       postalCode: "34567",
     },
     inputContainerStyle: {
-      borderBottomWidth: 1,
-      borderBottomColor: "black",
     },
     validColor: "",
     invalidColor: "red",
     placeholderColor: "gray",
-    allowScroll: false,
     additionalInputsProps: {},
   };
 
@@ -141,7 +141,7 @@ export default class CreditCardInput extends Component {
     const {
       cardImageFront, cardImageBack, inputContainerStyle,
       values: { number, expiry, cvc, name, type }, focused,
-      allowScroll, requiresName, requiresCVC, requiresPostalCode,
+      requiresName, requiresCVC, requiresPostalCode,
       cardScale, cardFontFamily, cardBrandIcons,
     } = this.props;
 
@@ -159,9 +159,9 @@ export default class CreditCardInput extends Component {
             expiry={expiry}
             cvc={cvc} />
         <ScrollView ref="Form"
-            horizontal
+            horizontal={false}
             keyboardShouldPersistTaps="always"
-            scrollEnabled={allowScroll}
+            scrollEnabled={false}
             showsHorizontalScrollIndicator={false}
             style={s.form}>
           <CCInput {...this._inputProps("number")}
